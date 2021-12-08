@@ -9,8 +9,7 @@ int main(__attribute__((unused))int argc, char *array[])
 {
 	size_t memory = 1;
 	ssize_t ending = 0;
-	char *comand = NULL, waiting[1024];
-	int i;
+	char *comand = NULL, waiting[] = "prompt$ ";
 
 	com_exit = 1;
 	if (isatty(fileno(stdin)))
@@ -18,9 +17,6 @@ int main(__attribute__((unused))int argc, char *array[])
 		signal(SIGINT, ctr_c);
 		while (com_exit != 0)
 		{
-			getcwd(waiting, sizeof(waiting));
-			i = _strlen(waiting);
-			waiting[i] = '$', waiting[i + 1] = ' ', waiting[i + 2] = '\0';
 			write(STDOUT_FILENO, waiting, _strlen(waiting));
 			ending = getline(&comand, &memory, stdin);
 			if (ending == -1)

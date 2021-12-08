@@ -5,19 +5,12 @@
  */
 void ctr_c(int ctr1_c)
 {
-	char waiting[1024];
-	int i;
+	char waiting[] = "prompt$ ";
 
 	if (ctr1_c == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		getcwd(waiting, sizeof(waiting));
-			for (i = 0; waiting[i] != '\0'; i++)
-				;
-			waiting[i] = '$';
-			waiting[i + 1] = ' ';
-			waiting[i + 2] = '\0';
-			write(STDOUT_FILENO, waiting, _strlen(waiting));
+		write(STDOUT_FILENO, waiting, _strlen(waiting));
 	}
 }
 /**
