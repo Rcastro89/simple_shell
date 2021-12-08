@@ -24,24 +24,21 @@ typedef struct buily_in
 
 
 extern char **environ;
-int ctr_error_isaty, com_exit;
-char **fill;
 
-
-void **select_command(char *comand, char *array);
+int select_command(char *comand, char *array, int ctr_error_isaty);
 int error(char *comand, int readcomand);
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
-char **search_path(char *path);
+char **search_path(char *path, int ctr_error_isaty);
 char *tok(char *path, char *limit);
 char *_strcat(char *dest, char *src);
 int comp_comand(char *command, char simbol);
 int proccess_fork(char *exe, char **argv);
-int loop_token(char *str1, char *token1, char *comand);
+int loop_token(char *str1, char *token1, char *comand, int ctr_error_isaty);
 char *_strdup(char *str);
 void ctr_c(int ctr1_c);
-void only_comand(char *copycom, char *str1, char *comand, char *array);
-void argv_exec(char *comand, char *exe);
+int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_error_isaty);
+void argv_exec(char *comand, char *exe, int ctr_error_isaty);
 int (exit_program(__attribute__((unused))char **command));
 int (*built_in(char *commad))(char **);
 int fun_error(__attribute__((unused))char **command);

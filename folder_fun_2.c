@@ -32,8 +32,7 @@ int (*built_in(char *commad))(char **)
  */
 int (exit_program(__attribute__((unused))char **command))
 {
-	com_exit = 0;
-	return (0);
+	return (1);
 }
 /**
  * fun_error - control errors
@@ -43,8 +42,6 @@ int (exit_program(__attribute__((unused))char **command))
 int fun_error(__attribute__((unused))char **command)
 {
 	perror("./shell");
-	if (ctr_error_isaty == -1)
-		_exit(127);
 	return (0);
 }
 /**

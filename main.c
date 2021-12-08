@@ -10,12 +10,12 @@ int main(__attribute__((unused))int argc, char *array[])
 	size_t memory = 1;
 	ssize_t ending = 0;
 	char *comand = NULL, waiting[] = "prompt$ ";
+	int com_exit = 0;
 
-	com_exit = 1;
 	if (isatty(fileno(stdin)))
 	{
 		signal(SIGINT, ctr_c);
-		while (com_exit != 0)
+		while (com_exit != 1)
 		{
 			write(STDOUT_FILENO, waiting, _strlen(waiting));
 			ending = getline(&comand, &memory, stdin);
@@ -27,8 +27,8 @@ int main(__attribute__((unused))int argc, char *array[])
 			}
 			else if (*comand != 10)
 			{
-				select_command(comand, array[0]);
-				if (com_exit == 0)
+				com_exit = select_command(comand, array[0], 0);
+				if (com_exit == 1)
 				{
 					free(comand);
 					return (0);

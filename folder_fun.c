@@ -21,14 +21,8 @@ void ctr_c(int ctr1_c)
  */
 void no_isatty(char *comand, size_t memory, char *array[])
 {
-	ctr_error_isaty = -1;
 	getline(&comand, &memory, stdin);
-	select_command(comand, array[0]);
-	if (com_exit == 0)
-	{
-		free(comand);
-		return;
-	}
+	select_command(comand, array[0], -1);
 }
 /**
  * select_command - check the command or path entered
@@ -36,39 +30,39 @@ void no_isatty(char *comand, size_t memory, char *array[])
  * @array: parameter array (not interective)
  * Return: NULL
  */
-void **select_command(char *comand, char *array)
+int select_command(char *comand, char *array, int ctr_error_isaty)
 {
-	int dir;
+	int dir, com_exit = 0;
 	char *delim = " \n\t\"";
 	char *exe;
 	char *copycom = NULL, **get_path = NULL, *str1;
 
-	get_path = search_path("PATH=");
+	get_path = search_path("PATH=", ctr_error_isaty);
 	str1 = *get_path;
 	copycom = _strdup(comand);
 	dir = comp_comand(comand, '/');
 	if (dir == 0)
 	{
-		only_comand(copycom, str1, comand, array);
+		com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
 	}
 	else
 	{
 		exe = strtok(copycom, delim);
-		argv_exec(comand, exe);
+		argv_exec(comand, exe, ctr_error_isaty);
 	}
-	free(fill[0]);
-	free(fill);
+	free(get_path[0]);
+	free(get_path);
 	free(copycom);
-	return (NULL);
+	return (com_exit);
 }
 /**
  * search_path - Find the location of the PATH in the environment
  * @path: searched string "PATH ="
  * Return: PATH
  */
-char **search_path(char *path)
+char **search_path(char *path, int ctr_error_isaty)
 {
-	char **ret = environ, comp[5] = {0};
+	char **ret = environ, comp[5] = {0}, **fill;
 	int j = 0, i = 0, k = 0;
 
 	while (*ret)
