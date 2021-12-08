@@ -4,7 +4,7 @@
  * @commad: command entered by user
  * Return: (0) success
  */
-int (*built_in(char *commad))(char **)
+int (*built_in(char *commad))(char *)
 {
 	int i = 0;
 
@@ -30,7 +30,7 @@ int (*built_in(char *commad))(char **)
  * @command: command entered by user
  * Return: (0) success
  */
-int (exit_program(__attribute__((unused))char **command))
+int (exit_program(__attribute__((unused))char *command))
 {
 	return (1);
 }
@@ -39,17 +39,16 @@ int (exit_program(__attribute__((unused))char **command))
  * @command: command entered by user
  * Return: (0) success
  */
-int fun_error(__attribute__((unused))char **command)
+int fun_error(__attribute__((unused))char *command)
 {
-	perror("./shell");
-	return (0);
+	return (2);
 }
 /**
  * print_environ - function env
  * @command: command entered by user
  * Return: (0) success
  */
-int print_environ(__attribute__((unused))char **command)
+int print_environ(__attribute__((unused))char *command)
 {
 	char **ret = environ;
 	int j = 0;

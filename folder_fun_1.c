@@ -31,19 +31,20 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 {
 	char *token1;
 	int ctr_error = -1, k = 0, com_exit = 0;
-	char *delim = " \n\t\"", **built = NULL;
+	char *delim = " \n\t\"", *built = NULL;
 
 	token1 = strtok(copycom, delim);
 	k = _strlen(token1);
 	token1[k + 1] = '\0';
-	ctr_error = loop_token(str1, token1, comand, ctr_error_isaty);
+	built = _strdup(copycom);
+	com_exit = built_in(copycom)(built);
+	free(built);
+	if (com_exit == 2)
+	{
+		ctr_error = loop_token(str1, token1, comand, ctr_error_isaty);
+	}	
 	if (ctr_error == -1 && ctr_error_isaty != -1)
 	{
-		built = malloc(sizeof(char) * _strlen(copycom));
-		*built = _strdup(copycom);
-		com_exit = built_in(copycom)(built);
-		free(built[0]);
-		free(built);
 		return (com_exit);
 	}
 	else if (ctr_error == -1 && ctr_error_isaty == -1)
@@ -66,16 +67,19 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
  */
 int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, int ctr_error_isaty)
 {
-	int j, ctr_error = -1;
+	int j, ctr_error = -1, k = 0;
 	char *token = NULL, *exe = NULL, *sim = "/\0";
 	struct stat buf;
 
-	for (j = 1; ; j++, str1 = NULL)
+	token = strtok(str1, ":");
+	token = NULL;
+	for (j = 1; ; j++)
 	{
-		token = strtok(str1, ":");
+		token = strtok(NULL, ":");
 		if (token == NULL)
 			break;
-		exe = malloc(sizeof(char) * (_strlen(token1) + _strlen(token)) + 2);
+		k = _strlen(token);
+		exe = malloc(sizeof(char) * (_strlen(token1) + k) + 2);
 		if (exe == NULL)
 			return (-1);
 		exe[0] = '\0';
