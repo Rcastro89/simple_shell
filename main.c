@@ -29,13 +29,14 @@ int main(__attribute__((unused))int argc, char *array[])
 			else if (*comand != 10)
 			{
 				com_exit = select_command(comand, array[0], 0);
+				free(comand);
 				if (com_exit == 1)
 				{
-					free(comand);
 					return (0);
 				}
 			}
-			free(comand);
+			else
+				free(comand);
 		}
 	}
 	else
