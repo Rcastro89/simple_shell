@@ -18,6 +18,7 @@ int main(__attribute__((unused))int argc, char *array[])
 		while (com_exit != 1)
 		{
 			write(STDOUT_FILENO, waiting, _strlen(waiting));
+			comand = NULL;
 			ending = getline(&comand, &memory, stdin);
 			if (ending == -1)
 			{
@@ -35,7 +36,6 @@ int main(__attribute__((unused))int argc, char *array[])
 				}
 			}
 			free(comand);
-			comand = NULL;
 		}
 	}
 	else
