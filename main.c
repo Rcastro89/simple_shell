@@ -5,7 +5,7 @@
  * @array: parameter array (not interective)
  * Return: (0) success
  */
-int main(_attribute_((unused))int argc, char *array[])
+int main(__attribute__((unused))int argc, char *array[])
 {
 	size_t memory = 1;
 	ssize_t ending = 0;

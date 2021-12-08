@@ -18,13 +18,15 @@
  */
 typedef struct buily_in
 {
-	char *comand, int (f)(char *);
-
+	char *comand;
+	int (*f)(char **);
 } bu_in;
+
 
 extern char **environ;
 int ctr_error_isaty, com_exit;
 char **fill;
+
 
 void **select_command(char *comand, char *array);
 int error(char *comand, int readcomand);
@@ -40,11 +42,11 @@ char *_strdup(char *str);
 void ctr_c(int ctr1_c);
 void only_comand(char *copycom, char *str1, char *comand, char *array);
 void argv_exec(char *comand, char *exe);
-int (exit_program(_attribute_((unused))char **command));
-int (built_in(char *commad))(char *);
-int fun_error(_attribute_((unused))char **command);
+int (exit_program(__attribute__((unused))char **command));
+int (*built_in(char *commad))(char **);
+int fun_error(__attribute__((unused))char **command);
 int comp_comand_1(char *command, char simbol);
-int print_environ(_attribute_((unused))char **command);
+int print_environ(__attribute__((unused))char **command);
 void no_isatty(char *comand, size_t memory, char *array[]);
 
 #endif /* MAIN_H */
