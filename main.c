@@ -7,7 +7,7 @@
  */
 int main(__attribute__((unused))int argc, char *array[])
 {
-	size_t memory = 1;
+	size_t memory = 0;
 	ssize_t ending = 0;
 	char *comand = NULL, waiting[] = "prompt$ ";
 	int com_exit = 0;
