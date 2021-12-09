@@ -24,6 +24,7 @@ typedef struct buily_in
 
 
 extern char **environ;
+int laps;
 
 int select_command(char *comand, char *array, int ctr_error_isaty);
 int error(char *comand, int readcomand);

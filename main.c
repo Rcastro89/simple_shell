@@ -12,6 +12,7 @@ int main(__attribute__((unused))int argc, char *array[])
 	char *comand, waiting[] = "prompt$ ";
 	int com_exit = 0, ctr_error_isaty = -1;
 
+	laps = 0;
 	signal(SIGINT, ctr_c);
 		while (com_exit != 2)
 		{
@@ -20,6 +21,8 @@ int main(__attribute__((unused))int argc, char *array[])
 				ctr_error_isaty = 0;
 				write(STDOUT_FILENO, waiting, _strlen(waiting));
 			}
+			else
+				laps++;
 			comand = NULL;
 			ending = getline(&comand, &memory, stdin);
 			if (ending == EOF)

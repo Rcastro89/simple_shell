@@ -61,6 +61,8 @@ char *array, int ctr_error_isaty)
 	{
 		if (token1)
 		{
+			if (laps == 2)
+				exit(2);
 			write(STDOUT_FILENO, array, _strlen(array));
 			write(STDOUT_FILENO, ": 1: ", 5);
 			write(STDOUT_FILENO, copycom, _strlen(copycom));
@@ -146,7 +148,7 @@ void argv_exec(char *comand, char *exe, int ctr_error_isaty)
 	{
 		perror("./shell");
 		if (ctr_error_isaty == -1)
-			_exit(EXIT_FAILURE);
+			_exit(2);
 	}
 }
 /**
