@@ -29,7 +29,7 @@ int main(__attribute__((unused))int argc, char *array[])
 				free(comand);
 				if (isatty(fileno(stdin)))
 					write(STDOUT_FILENO, "\n", 1);
-				exit(0);
+				exit(EXIT_SUCCESS);
 			}
 			else if (ending == -1)
 			{

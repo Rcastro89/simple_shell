@@ -64,7 +64,7 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 			write(STDOUT_FILENO, ": not found\n", 12);
 			exit(127);
 		}
-		exit(0);
+		return (ctr_error);
 	}
 	return (ctr_error);
 }
@@ -143,7 +143,7 @@ void argv_exec(char *comand, char *exe, int ctr_error_isaty)
 	{
 		perror("./shell");
 		if (ctr_error_isaty == -1)
-			_exit(127);
+			_exit(EXIT_FAILURE);
 	}
 }
 /**
