@@ -1,41 +1,120 @@
 #include "main.h"
-
-int select_command(char *comand)
+/**
+ * ctr_c - add new line by pressing ctr + c
+ * @ctr1_c: SIGINT
+ */
+void ctr_c(int ctr1_c)
 {
-	int com_exit = 0;
-	
-		argv_exec(comand);
+	char waiting[] = "prompt$ ";
 
+	if (ctr1_c == SIGINT)
+	{
+		write(STDOUT_FILENO, "\n", 1);
+		write(STDOUT_FILENO, waiting, _strlen(waiting));
+	}
+}
+/**
+ * no_isatty - non-interactive mode
+ * @comand: command entered by user
+ * @memory: memory used by getline
+ * @array: parameter array (not interective)
+ */
+void no_isatty(char *comand, size_t memory, char *array[])
+{
+	getline(&comand, &memory, stdin);
+	select_command(comand, array[0], -1);
+}
+/**
+ * select_command - check the command or path entered
+ * @comand: command entered by user
+ * @array: parameter array (not interective)
+ * Return: NULL
+ */
+int select_command(char *comand, char *array, int ctr_error_isaty)
+{
+	int dir, com_exit = 0;
+	char *delim = " \n\t\"";
+	char *exe;
+	char *copycom = NULL, **get_path = NULL, *str1;
+
+	get_path = search_path("PATH=", ctr_error_isaty);
+	str1 = *get_path;
+	copycom = _strdup(comand);
+	dir = comp_comand(comand, '/');
+	if (dir == 0)
+	{
+		com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
+		free(get_path[0]);
+		free(get_path);
+		free(copycom);
+	}
+	else
+	{
+		exe = strtok(copycom, delim);
+		argv_exec(comand, exe, ctr_error_isaty);
+		free(get_path[0]);
+		free(get_path);
+		free(copycom);
+	}
 	return (com_exit);
 }
-
-void argv_exec(__attribute__((unused))char *comand)
+/**
+ * search_path - Find the location of the PATH in the environment
+ * @path: searched string "PATH ="
+ * Return: PATH
+ */
+char **search_path(char *path, int ctr_error_isaty)
 {
-	struct stat buf;
-	char *argv[1024];
+	char **ret = environ, comp[5] = {0}, **fill;
+	int j = 0, i = 0, k = 0;
 
-	argv[0] = "/bin/ls", argv[1] = NULL;
-	if (stat("/bin/ls", &buf) == 0)
-		proccess_fork("/bin/ls", argv);
-	else
+	while (*ret)
+	{
+		for (i = 0; i < 5; i++)
+		{
+			comp[i] = ret[j][i];
+		}
+		k = _strcmp(comp, path);
+		if (k == 0)
+		{
+			k = _strlen(ret[j]);
+			fill = malloc(sizeof(char) * k + 1);
+			if (fill == NULL)
+			return (NULL);
+			*fill = _strdup(*ret);
+			fill[0][4] = ':';
+			break;
+		}
+		ret++;
+	}
+	if (fill == NULL)
 	{
 		perror("./shell");
+		if (ctr_error_isaty == -1)
+			_exit(127);
 	}
+	return (fill);
 }
 
-int proccess_fork(char *exe, char **argv)
+/**
+ * comp_comand - look for special symbols
+ * @command: command entered by user
+ * @simbol: character to evaluate
+ * Return: Symbol count
+ */
+int comp_comand(char *command, char simbol)
 {
-	pid_t pid;
+	int ret = 0, i;
+	char stop = ' ';
 
-	pid = fork();
-	if (pid < 0)
-		perror("./shell");
-	else if (pid > 0)
-		wait(NULL);
-	else
+	for (i = 0; command[i] != simbol && command[i] != '\0' ; i++)
+		;
+	for (; command[i] != stop && command[i] != '\0'; i++)
 	{
-		execv(exe, argv);
-		exit(1);
+		if (command[i] == simbol)
+		{
+			ret++;
+		}
 	}
-	return (0);
+	return (ret);
 }
