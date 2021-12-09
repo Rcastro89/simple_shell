@@ -33,7 +33,6 @@ int main(__attribute__((unused))int argc, char *array[])
 			{
 				write(STDOUT_FILENO, "\n", 1);
 				perror("./shell");
-				return (com_exit);
 			}
 			else if (*comand != 10)
 			{
