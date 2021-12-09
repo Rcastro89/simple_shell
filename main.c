@@ -25,7 +25,7 @@ int main()
 				free(comand);
 				if (isatty(fileno(stdin)))
 					write(STDOUT_FILENO, "\n", 1);
-				exit(127);
+				return(0);
 			}
 			else if (ending == -1)
 			{
