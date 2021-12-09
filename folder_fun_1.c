@@ -60,7 +60,7 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 		write(STDOUT_FILENO, ": 1: ", 5);
 		write(STDOUT_FILENO, copycom, _strlen(copycom));
 		write(STDOUT_FILENO, ": not found\n", 12);
-		exit(127);
+		exit(0);
 	}
 	return (ctr_error);
 }
