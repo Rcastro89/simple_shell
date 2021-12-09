@@ -62,7 +62,7 @@ char *array, int ctr_error_isaty)
 		if (token1)
 		{
 			if (laps == 2)
-				exit(2);
+				return(2);
 			write(STDOUT_FILENO, array, _strlen(array));
 			write(STDOUT_FILENO, ": 1: ", 5);
 			write(STDOUT_FILENO, copycom, _strlen(copycom));

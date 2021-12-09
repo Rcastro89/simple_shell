@@ -45,5 +45,7 @@ int main(__attribute__((unused))int argc, char *array[])
 			else
 				free(comand);
 		}
+	if (laps == 2)
+		return (2);
 	return (0);
 }
