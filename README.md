@@ -54,6 +54,14 @@ total 56
 -rwxrwxrwx 1 root root   981 Dec  7 19:40 man_1_simple_shell
 /mnt/d/COHORTE 16 HOLBERTON/simple_shell$ 
 ```
+```
+root@NELSON-G:/mnt/d/COHORTE 16 HOLBERTON/simple_shell# ./hsh
+prompt$ ls
+AUTHORS    folder_fun.c    folder_fun_2.c  hsh     main.h
+README.md  folder_fun_1.c  function.c      main.c  man_1_simple_shell
+prompt$ exit
+root@NELSON-G:/mnt/d/COHORTE 16 HOLBERTON/simple_shell# 
+```
 
 ---
 
