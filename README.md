@@ -39,6 +39,7 @@ $
 
 ## Examples
 
+...
 /mnt/d/COHORTE 16 HOLBERTON/simple_shell$ /bin/ls -l                           
 total 56
 -rwxrwxrwx 1 root root   220 Dec  8 12:42 AUTHORS
@@ -52,7 +53,7 @@ total 56
 -rwxrwxrwx 1 root root  1349 Dec  8 11:18 main.h
 -rwxrwxrwx 1 root root   981 Dec  7 19:40 man_1_simple_shell
 /mnt/d/COHORTE 16 HOLBERTON/simple_shell$ 
-
+...
 
 ---
 
