@@ -50,14 +50,9 @@ int fun_error(__attribute__((unused))char *command)
  */
 int print_environ(__attribute__((unused))char *command)
 {
-	char **ret = environ;
-	int j = 0;
+	unsigned int j;
 
-	while (*ret)
-	{
-		write(STDOUT_FILENO, ret[j], _strlen(ret[j]));
-		ret++;
-		j++;
-	}
-	return (0);
+	for (j = 0; environ[j]; j++)
+		_puts(environ[j]);
+	return (3);
 }

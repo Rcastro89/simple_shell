@@ -53,6 +53,8 @@ char *array, int ctr_error_isaty)
 	{
 		ctr_error = loop_token(str1, token1, comand, ctr_error_isaty);
 	}
+	if (com_exit == 3)
+		return (ctr_error);
 	if (ctr_error == -1 && ctr_error_isaty != -1)
 	{
 		return (1);

@@ -46,5 +46,7 @@ int (*built_in(char *commad))(char *);
 int fun_error(__attribute__((unused))char *command);
 int comp_comand_1(char *command, char simbol);
 int print_environ(__attribute__((unused))char *command);
+int _putchar(char c);
+void _puts(char *str);
 
 #endif /* MAIN_H */
