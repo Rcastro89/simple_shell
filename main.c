@@ -37,6 +37,8 @@ int main(__attribute__((unused))int argc, char *array[])
 				com_exit = select_command(comand, array[0], 0);
 				free(comand);
 			}
+			else
+				free(comand);
 		}
 	return (0);
 }
