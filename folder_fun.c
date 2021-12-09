@@ -1,6 +1,6 @@
 #include "main.h"
 
-int select_command(char *comand,  __attribute__((unused)) char *array)
+int select_command(char *comand)
 {
 	int com_exit = 0;
 	

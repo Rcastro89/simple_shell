@@ -5,7 +5,7 @@
  * @array: parameter array (not interective)
  * Return: (0) success
  */
-int main(__attribute__((unused))int argc, __attribute__((unused))char *array[])
+int main()
 {
 	size_t memory = 0;
 	ssize_t ending = 0;
@@ -34,7 +34,7 @@ int main(__attribute__((unused))int argc, __attribute__((unused))char *array[])
 			}
 			else if (*comand != 10)
 			{
-				select_command(comand, array[0]);
+				select_command(comand);
 				free(comand);
 			}
 			else
