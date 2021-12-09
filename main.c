@@ -5,7 +5,7 @@
  * @array: parameter array (not interective)
  * Return: (0) success
  */
-int main(__attribute__((unused))int argc, char *array[])
+int main(__attribute__((unused))int argc, __attribute__((unused))char *array[])
 {
 	size_t memory = 0;
 	ssize_t ending = 0;
@@ -13,7 +13,7 @@ int main(__attribute__((unused))int argc, char *array[])
 	int com_exit = 0;
 
 	
-	signal(SIGINT, ctr_c);
+	/*signal(SIGINT, ctr_c);*/
 		while (com_exit != 2)
 		{
 			if (isatty(fileno(stdin)))
@@ -34,7 +34,7 @@ int main(__attribute__((unused))int argc, char *array[])
 			}
 			else if (*comand != 10)
 			{
-				com_exit = select_command(comand, array[0], 0);
+				select_command(comand, array[0]);
 				free(comand);
 			}
 			else
