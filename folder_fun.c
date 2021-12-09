@@ -9,16 +9,14 @@ int select_command(char *comand)
 	return (com_exit);
 }
 
-void argv_exec(char *comand)
+void argv_exec(__attribute__((unused))char *comand)
 {
 	struct stat buf;
 	char *argv[1024];
-	char *delim = " \n\t\"", *token1;
 
-	token1 = strtok(comand, delim);
-	argv[0] = token1, argv[1] = NULL;
-	if (stat(token1, &buf) == 0)
-		proccess_fork(token1, argv);
+	argv[0] = "/bin/ls", argv[1] = NULL;
+	if (stat("/bin/ls", &buf) == 0)
+		proccess_fork("/bin/ls", argv);
 	else
 	{
 		perror("./shell");
