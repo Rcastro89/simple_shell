@@ -39,6 +39,10 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 	built = _strdup(copycom);
 	com_exit = built_in(copycom)(built);
 	free(built);
+	if (com_exit == 1)
+	{
+		return (2);
+	}
 	if (com_exit == 2)
 	{
 		ctr_error = loop_token(str1, token1, comand, ctr_error_isaty);
@@ -55,7 +59,7 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 		write(STDOUT_FILENO, ": not found\n", 12);
 		exit(127);
 	}
-	return (com_exit);
+	return (ctr_error);
 }
 
 /**
@@ -72,12 +76,10 @@ int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, in
 	struct stat buf;
 
 	token = strtok(str1, ":");
-	token = NULL;
-	for (j = 1; ; j++)
+	while (token != NULL)
 	{
+		j = 1;
 		token = strtok(NULL, ":");
-		if (token == NULL)
-			break;
 		k = _strlen(token);
 		exe = malloc(sizeof(char) * (_strlen(token1) + k) + 2);
 		if (exe == NULL)
@@ -93,6 +95,7 @@ int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, in
 			free(exe);
 			break;
 		}
+		j++;
 		free(exe);
 	}
 return (ctr_error);

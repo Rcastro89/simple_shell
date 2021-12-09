@@ -44,15 +44,18 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 	if (dir == 0)
 	{
 		com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
+		free(get_path[0]);
+		free(get_path);
+		free(copycom);
 	}
 	else
 	{
 		exe = strtok(copycom, delim);
 		argv_exec(comand, exe, ctr_error_isaty);
+		free(get_path[0]);
+		free(get_path);
+		free(copycom);
 	}
-	free(get_path[0]);
-	free(get_path);
-	free(copycom);
 	return (com_exit);
 }
 /**

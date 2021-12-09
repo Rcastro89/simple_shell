@@ -14,31 +14,29 @@ int main(__attribute__((unused))int argc, char *array[])
 
 	
 	signal(SIGINT, ctr_c);
-		while (com_exit != 1)
+		while (com_exit != 2)
 		{
 			if (isatty(fileno(stdin)))
 				write(STDOUT_FILENO, waiting, _strlen(waiting));
 			comand = NULL;
 			ending = getline(&comand, &memory, stdin);
-			if (ending == -1)
+			if (ending == EOF)
 			{
 				free(comand);
 				if (isatty(fileno(stdin)))
 					write(STDOUT_FILENO, "\n", 1);
 				exit(127);
 			}
+			else if (ending == -1)
+			{
+				write(STDOUT_FILENO, "\n", 1);
+				perror("./shell");
+			}
 			else if (*comand != 10)
 			{
 				com_exit = select_command(comand, array[0], 0);
 				free(comand);
-				if (com_exit == 1)
-				{
-					return (0);
-				}
 			}
-			else
-				free(comand);
 		}
-	free(comand);
 	return (0);
 }
