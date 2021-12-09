@@ -99,7 +99,6 @@ int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, in
 		}
 		j++;
 		free(exe);
-		i--;
 	}
 return (ctr_error);
 }
