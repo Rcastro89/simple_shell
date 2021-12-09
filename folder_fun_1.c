@@ -34,8 +34,11 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 	char *delim = " \n\t\"", *built = NULL;
 
 	token1 = strtok(copycom, delim);
-	k = _strlen(token1);
-	token1[k + 1] = '\0';
+	if (token1)
+	{
+		k = _strlen(token1);
+		token1[k + 1] = '\0';
+	}
 	built = _strdup(copycom);
 	com_exit = built_in(copycom)(built);
 	free(built);
@@ -46,7 +49,7 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
 	if (com_exit == 2)
 	{
 		ctr_error = loop_token(str1, token1, comand, ctr_error_isaty);
-	}	
+	}
 	if (ctr_error == -1 && ctr_error_isaty != -1)
 	{
 		return (1);
@@ -69,38 +72,41 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
  * @comand: command entered by user
  * Return: (0) success (-1) Error
  */
-int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, int ctr_error_isaty)
+int loop_token(char *str1, char *token1, char *comand, int ctr_error_isaty)
 {
 	int j, ctr_error = -1, k = 0;
 	char *token = NULL, *exe = NULL, *sim = "/\0";
 	struct stat buf;
 
-	token = strtok(str1, ":");
-	while (token)
+	if (token1)
 	{
-		j = 1;
-		token = strtok(NULL, ":");
-		if (token == NULL)
-			return (ctr_error);
-		k = _strlen(token);
-		exe = malloc(sizeof(char) * (_strlen(token1) + k) + 2);
-		if (exe == NULL)
-			return (-1);
-		exe[0] = '\0';
-		exe = _strcat(exe, token);
-		exe = _strcat(exe, sim);
-		exe = _strcat(exe, token1);
-		if (stat(exe, &buf) == 0)
+		token = strtok(str1, ":");
+		while (token)
 		{
-			ctr_error = 0;
-			argv_exec(comand, exe, ctr_error_isaty);
+			j = 1;
+			token = strtok(NULL, ":");
+			if (token == NULL)
+				return (ctr_error);
+			k = _strlen(token);
+			exe = malloc(sizeof(char) * (_strlen(token1) + k) + 2);
+			if (exe == NULL)
+				return (-1);
+			exe[0] = '\0';
+			exe = _strcat(exe, token);
+			exe = _strcat(exe, sim);
+			exe = _strcat(exe, token1);
+			if (stat(exe, &buf) == 0)
+			{
+				ctr_error = 0;
+				argv_exec(comand, exe, ctr_error_isaty);
+				free(exe);
+				break;
+			}
+			j++;
 			free(exe);
-			break;
 		}
-		j++;
-		free(exe);
 	}
-return (ctr_error);
+	return (ctr_error);
 }
 /**
  * argv_exec - build the argument for the execv command
@@ -116,7 +122,7 @@ void argv_exec(char *comand, char *exe, int ctr_error_isaty)
 	count_comands = comp_comand_1(comand, ' ');
 	if (count_comands != 0)
 	{
-		for (j = 0; ; j++, comand = NULL)
+		for (j = 0;; j++, comand = NULL)
 		{
 			token1 = strtok(comand, delim);
 			if (token1 == NULL)
