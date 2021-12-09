@@ -71,17 +71,12 @@ int only_comand(char *copycom, char *str1, char *comand, char *array, int ctr_er
  */
 int loop_token(char *str1, char *token1, __attribute__((unused))char *comand, int ctr_error_isaty)
 {
-	int j, ctr_error = -1, k = 0, i = 0;
+	int j, ctr_error = -1, k = 0;
 	char *token = NULL, *exe = NULL, *sim = "/\0";
 	struct stat buf;
 
-	for(; str1[k] != NULL, k++)
-	{
-		if (str1[k] == ':')
-			i++;
-	}
 	token = strtok(str1, ":");
-	while (i != 0)
+	while (token)
 	{
 		j = 1;
 		token = strtok(NULL, ":");
