@@ -32,7 +32,7 @@ int (*built_in(char *commad))(char *)
  */
 int (exit_program(__attribute__((unused))char *command))
 {
-	return (1);
+	return (2);
 }
 /**
  * fun_error - control errors
@@ -41,7 +41,7 @@ int (exit_program(__attribute__((unused))char *command))
  */
 int fun_error(__attribute__((unused))char *command)
 {
-	return (2);
+	return (1);
 }
 /**
  * print_environ - function env

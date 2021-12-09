@@ -14,20 +14,10 @@ void ctr_c(int ctr1_c)
 	}
 }
 /**
- * no_isatty - non-interactive mode
- * @comand: command entered by user
- * @memory: memory used by getline
- * @array: parameter array (not interective)
- */
-void no_isatty(char *comand, size_t memory, char *array[])
-{
-	getline(&comand, &memory, stdin);
-	select_command(comand, array[0], -1);
-}
-/**
  * select_command - check the command or path entered
  * @comand: command entered by user
  * @array: parameter array (not interective)
+ * @ctr_error_isaty: check interactive or non-interactive input
  * Return: NULL
  */
 int select_command(char *comand, char *array, int ctr_error_isaty)
@@ -61,6 +51,7 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 /**
  * search_path - Find the location of the PATH in the environment
  * @path: searched string "PATH ="
+ * @ctr_error_isaty: check interactive or non-interactive input
  * Return: PATH
  */
 char **search_path(char *path, int ctr_error_isaty)
@@ -80,7 +71,7 @@ char **search_path(char *path, int ctr_error_isaty)
 			k = _strlen(ret[j]);
 			fill = malloc(sizeof(char) * k + 1);
 			if (fill == NULL)
-			return (NULL);
+				return (NULL);
 			*fill = _strdup(*ret);
 			fill[0][4] = ':';
 			break;
