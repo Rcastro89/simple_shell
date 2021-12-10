@@ -28,7 +28,7 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 	char *copycom = NULL, **get_path = NULL, *str1;
 
 	copycom = strdup(comand);
-	get_path = search_path("PoTH=", ctr_error_isaty, array, copycom);
+	get_path = search_path("PATH=", ctr_error_isaty, array, copycom);
 	dir = comp_comand(comand, '/');
 	if (dir == 0)
 	{
