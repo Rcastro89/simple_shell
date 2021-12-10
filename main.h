@@ -45,7 +45,8 @@ int (*built_in(char *commad))(char *);
 int fun_error(__attribute__((unused))char *command);
 int comp_comand_1(char *command, char simbol);
 int print_environ(__attribute__((unused))char *command);
-char **search_path(char *path, int ctr_error_isaty, char *array, char *copycom);
+char **search_path(char *path, int ctr_error_isaty,
+char *array, char *copycom);
 int _putchar(char c);
 void _puts(char *str);
 void _EOF(char *comand);
