@@ -29,7 +29,7 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 
 	get_path = search_path("PATH=", ctr_error_isaty);
 	str1 = *get_path;
-	copycom = _strdup(comand);
+	copycom = strdup(comand);
 	dir = comp_comand(comand, '/');
 	if (dir == 0)
 	{
