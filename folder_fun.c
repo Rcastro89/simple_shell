@@ -27,15 +27,24 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 	char *exe;
 	char *copycom = NULL, **get_path = NULL, *str1;
 
-	get_path = search_path("PATH=", ctr_error_isaty);
-	str1 = *get_path;
 	copycom = strdup(comand);
+	get_path = search_path("PATH=", ctr_error_isaty, array, copycom);
 	dir = comp_comand(comand, '/');
 	if (dir == 0)
 	{
-		com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
-		free(get_path[0]);
-		free(get_path);
+		if (get_path)
+		{
+			str1 = *get_path;
+			com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
+		}
+		else
+			com_exit = 127;
+		if (get_path)
+		{
+			free(get_path[0]);
+			free(get_path);
+		}
+			
 		free(copycom);
 	}
 	else
@@ -54,9 +63,9 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
  * @ctr_error_isaty: check interactive or non-interactive input
  * Return: PATH
  */
-char **search_path(char *path, int ctr_error_isaty)
+char **search_path(char *path, int ctr_error_isaty, char *array, char *copycom)
 {
-	char **ret = environ, comp[5] = {0}, **fill;
+	char **ret = environ, comp[5] = {0}, **fill = NULL;
 	int j = 0, i = 0, k = 0;
 
 	while (*ret)
@@ -80,9 +89,15 @@ char **search_path(char *path, int ctr_error_isaty)
 	}
 	if (fill == NULL)
 	{
-		perror("./shell");
 		if (ctr_error_isaty == -1)
-			_exit(127);
+		{
+			write(STDOUT_FILENO, array, _strlen(array));
+			write(STDOUT_FILENO, ": 1: ", 5);
+			write(STDOUT_FILENO, copycom, _strlen(copycom) - 1);
+			write(STDOUT_FILENO, ": not found\n", 12);
+			return(fill);
+		}
+		perror("./shell");
 	}
 	return (fill);
 }

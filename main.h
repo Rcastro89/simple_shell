@@ -30,7 +30,6 @@ int select_command(char *comand, char *array, int ctr_error_isaty);
 int error(char *comand, int readcomand);
 int _strlen(char *s);
 int _strcmp(char *s1, char *s2);
-char **search_path(char *path, int ctr_error_isaty);
 char *tok(char *path, char *limit);
 char *_strcat(char *dest, char *src);
 int comp_comand(char *command, char simbol);
@@ -46,6 +45,7 @@ int (*built_in(char *commad))(char *);
 int fun_error(__attribute__((unused))char *command);
 int comp_comand_1(char *command, char simbol);
 int print_environ(__attribute__((unused))char *command);
+char **search_path(char *path, int ctr_error_isaty, char *array, char *copycom);
 int _putchar(char c);
 void _puts(char *str);
 

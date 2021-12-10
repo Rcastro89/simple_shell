@@ -69,7 +69,7 @@ char *array, int ctr_error_isaty)
 			write(STDOUT_FILENO, ": 1: ", 5);
 			write(STDOUT_FILENO, copycom, _strlen(copycom));
 			write(STDOUT_FILENO, ": not found\n", 12);
-			exit(127);
+			return(127);
 		}
 		return (2);
 	}

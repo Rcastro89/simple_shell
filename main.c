@@ -14,7 +14,7 @@ int main(__attribute__((unused))int argc, char *array[])
 
 	laps = 0;
 	signal(SIGINT, ctr_c);
-		while (com_exit != 2)
+		while (com_exit != 2 && com_exit != 127)
 		{
 			if (isatty(fileno(stdin)))
 			{
@@ -47,5 +47,7 @@ int main(__attribute__((unused))int argc, char *array[])
 		}
 	if (laps == 2)
 		return (2);
+	if (com_exit == 127)
+		return (127);
 	return (0);
 }
