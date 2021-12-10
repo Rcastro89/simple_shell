@@ -38,10 +38,7 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
 			com_exit = only_comand(copycom, str1, comand, array, ctr_error_isaty);
 		}
 		else
-		{
-			perror("./shell");
 			com_exit = 127;
-		}
 		if (get_path)
 		{
 			free(get_path[0]);
@@ -67,8 +64,7 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
  * @copycom: check interactive or non-interactive input
  * Return: PATH
  */
-char **search_path(char *path, __attribute__((unused))int ctr_error_isaty,
-__attribute__((unused))char *array, __attribute__((unused))char *copycom)
+char **search_path(char *path, int ctr_error_isaty, char *array, char *copycom)
 {
 	char **ret = environ, comp[5] = {0}, **fill = NULL;
 	int j = 0, i = 0, k = 0;
@@ -94,7 +90,15 @@ __attribute__((unused))char *array, __attribute__((unused))char *copycom)
 	}
 	if (fill == NULL)
 	{
-
+		if (ctr_error_isaty == -1)
+		{
+			write(STDERR_FILENO, array, _strlen(array));
+			write(STDERR_FILENO, ": 1: ", 5);
+			write(STDERR_FILENO, copycom, _strlen(copycom) - 1);
+			write(STDERR_FILENO, ": not found\n", 12);
+			return (fill);
+		}
+		perror("./shell");
 	}
 	return (fill);
 }
@@ -110,7 +114,7 @@ int comp_comand(char *command, char simbol)
 	int ret = 0, i;
 	char stop = ' ';
 
-	for (i = 0; command[i] != simbol && command[i] != '\0' ; i++)
+	for (i = 0; command[i] != simbol && command[i] != '\0'; i++)
 		;
 	for (; command[i] != stop && command[i] != '\0'; i++)
 	{
@@ -120,4 +124,11 @@ int comp_comand(char *command, char simbol)
 		}
 	}
 	return (ret);
+}
+void _EOF(char *comand)
+{
+	free(comand);
+	if (isatty(fileno(stdin)))
+		write(STDOUT_FILENO, "\n", 1);
+	exit(EXIT_SUCCESS);
 }
