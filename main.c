@@ -10,9 +10,8 @@ int main(__attribute__((unused))int argc, char *array[])
 	size_t memory = 0;
 	ssize_t ending = 0;
 	char *comand, waiting[] = "prompt$ ";
-	int com_exit = 0, ctr_error_isaty = -1;
+	int com_exit = 0, ctr_error_isaty = -1, laps1 = 0;
 
-	laps = 0;
 	signal(SIGINT, ctr_c);
 		while (com_exit != 2 && com_exit != 127)
 		{
@@ -22,7 +21,7 @@ int main(__attribute__((unused))int argc, char *array[])
 				write(STDOUT_FILENO, waiting, _strlen(waiting));
 			}
 			else
-				laps++;
+				laps1++;
 			comand = NULL;
 			ending = getline(&comand, &memory, stdin);
 			if (ending == EOF)
@@ -45,9 +44,7 @@ int main(__attribute__((unused))int argc, char *array[])
 			else
 				free(comand);
 		}
-	if (laps == 2)
+	if (laps1 == 2)
 		return (2);
-	if (com_exit == 127)
-		return (127);
 	return (0);
 }

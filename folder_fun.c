@@ -63,9 +63,12 @@ int select_command(char *comand, char *array, int ctr_error_isaty)
  * search_path - Find the location of the PATH in the environment
  * @path: searched string "PATH ="
  * @ctr_error_isaty: check interactive or non-interactive input
+ * @array: parameter array (not interective)
+ * @copycom: check interactive or non-interactive input
  * Return: PATH
  */
-char **search_path(char *path, __attribute__((unused))int ctr_error_isaty, __attribute__((unused))char *array, __attribute__((unused))char *copycom)
+char **search_path(char *path, __attribute__((unused))int ctr_error_isaty,
+__attribute__((unused))char *array, __attribute__((unused))char *copycom)
 {
 	char **ret = environ, comp[5] = {0}, **fill = NULL;
 	int j = 0, i = 0, k = 0;
@@ -91,15 +94,7 @@ char **search_path(char *path, __attribute__((unused))int ctr_error_isaty, __att
 	}
 	if (fill == NULL)
 	{
-		/*if (ctr_error_isaty == -1)
-		{
-			write(STDOUT_FILENO, array, _strlen(array));
-			write(STDOUT_FILENO, ": 1: ", 5);
-			write(STDOUT_FILENO, copycom, _strlen(copycom) - 1);
-			write(STDOUT_FILENO, ": not found\n", 12);
-			return(fill);
-		}
-		perror("./shell");*/
+
 	}
 	return (fill);
 }

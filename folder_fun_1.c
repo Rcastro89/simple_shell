@@ -64,13 +64,9 @@ __attribute__((unused))char *array, int ctr_error_isaty)
 		if (token1)
 		{
 			if (laps == 2)
-				return(2);
-			/*write(STDOUT_FILENO, array, _strlen(array));
-			write(STDOUT_FILENO, ": 1: ", 5);
-			write(STDOUT_FILENO, copycom, _strlen(copycom));
-			write(STDOUT_FILENO, ": not found\n", 12);*/
+				return (2);
 			perror("./shell");
-			return(127);
+			return (127);
 		}
 		return (2);
 	}
