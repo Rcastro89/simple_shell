@@ -125,6 +125,10 @@ int comp_comand(char *command, char simbol)
 	}
 	return (ret);
 }
+/**
+ * _EOF - eof funtions
+ * @comand: command entered by user
+ */
 void _EOF(char *comand)
 {
 	free(comand);
