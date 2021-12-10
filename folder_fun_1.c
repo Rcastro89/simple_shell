@@ -30,7 +30,7 @@ int comp_comand_1(char *command, char simbol)
  * Return: (control exit)
  */
 int only_comand(char *copycom, char *str1, char *comand,
-char *array, int ctr_error_isaty)
+__attribute__((unused))char *array, int ctr_error_isaty)
 {
 	char *token1;
 	int ctr_error = -1, k = 0, com_exit = 0;
@@ -65,10 +65,11 @@ char *array, int ctr_error_isaty)
 		{
 			if (laps == 2)
 				return(2);
-			write(STDOUT_FILENO, array, _strlen(array));
+			/*write(STDOUT_FILENO, array, _strlen(array));
 			write(STDOUT_FILENO, ": 1: ", 5);
 			write(STDOUT_FILENO, copycom, _strlen(copycom));
-			write(STDOUT_FILENO, ": not found\n", 12);
+			write(STDOUT_FILENO, ": not found\n", 12);*/
+			perror("./shell");
 			return(127);
 		}
 		return (2);
@@ -171,7 +172,6 @@ int proccess_fork(char *exe, char **argv)
 	else
 	{
 		execv(exe, argv);
-		exit(1);
 	}
 	return (0);
 }
